@@ -13,9 +13,18 @@ jobs:
       - name: Build Docker image
         run: |
           docker build \
-            -t eu.gcr.io/real-estate-classifieds/actions-test/test:${GITHUB_SHA::8} \
+            -t eu.gcr.io/real-estate-classifieds/actions-test/test:${{ github.sha }} \
             .
-    
+
+      - name: Login to Google Cloud
+        env:
+          GCLOUD_AUTH: ${{ secrets.GCLOUD_AUTH }}
+        run: |
+          echo "$GCLOUD_AUTH" | base64 --decode > ${HOME}/gcloud.json
+          gcloud auth activate-service-account --key-file=${HOME}/gcloud.json
+          gcloud auth configure-docker
+          rm ${HOME}/gcloud.json
+
       - uses: Pararius/gcr-deploy@v0.1
         with:
           host: eu.gcr.io
