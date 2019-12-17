@@ -18,7 +18,8 @@ jobs:
     
       - uses: Pararius/gcr-deploy@v0.1
         with:
-          project: 'real-estate-classifieds'
-          image: 'test'
-          tag: ${GITHUB_SHA::8}
-          tag-as-latest: 'true'
+          host: eu.gcr.io
+          project: real-estate-classifieds
+          image: test
+          tag: "${GITHUB_SHA::8}"
+          tag-as-latest: true
