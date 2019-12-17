@@ -5,17 +5,20 @@ on: [push]
 
 jobs:
   build:
-    - uses: actions/checkout@v1
+    runs-on: ubuntu-latest
     
-    - name: Build Docker image
-      run: |
-        docker build \
-          -t eu.gcr.io/real-estate-classifieds/actions-test/test:${GITHUB_SHA::8}
-          .
+    steps:
+      - uses: actions/checkout@v1
     
-    - uses: Pararius/gcr-deploy@master
-      with:
-        project: 'real-estate-classifieds'
-        image: 'test'
-        tag: ${GITHUB_SHA::8}
-        tag-as-latest: 'true'
+      - name: Build Docker image
+        run: |
+          docker build \
+            -t eu.gcr.io/real-estate-classifieds/actions-test/test:${GITHUB_SHA::8}
+            .
+    
+      - uses: Pararius/gcr-deploy@master
+        with:
+          project: 'real-estate-classifieds'
+          image: 'test'
+          tag: ${GITHUB_SHA::8}
+          tag-as-latest: 'true'
