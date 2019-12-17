@@ -16,7 +16,7 @@ jobs:
             -t eu.gcr.io/real-estate-classifieds/actions-test/test:${GITHUB_SHA::8}
             .
     
-      - uses: Pararius/gcr-deploy@master
+      - uses: Pararius/gcr-deploy@v0.1
         with:
           project: 'real-estate-classifieds'
           image: 'test'
