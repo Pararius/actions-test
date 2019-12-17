@@ -13,7 +13,7 @@ jobs:
       - name: Build Docker image
         run: |
           docker build \
-            -t eu.gcr.io/real-estate-classifieds/actions-test/test:${GITHUB_SHA::8}
+            -t eu.gcr.io/real-estate-classifieds/actions-test/test:${GITHUB_SHA::8} \
             .
     
       - uses: Pararius/gcr-deploy@v0.1
