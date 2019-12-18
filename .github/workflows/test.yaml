@@ -25,10 +25,13 @@ jobs:
           gcloud auth configure-docker
           rm ${HOME}/gcloud.json
 
-      - uses: Pararius/gcr-deploy@v0.3
+      - name: Deploy to GCR
+        env:
+          SHA8: ${GITHUB_SHA::8}
+        uses: Pararius/gcr-deploy@v0.3
         with:
           host: eu.gcr.io
           project: real-estate-classifieds
           image: actions-test/test
-          tag: ${{ github.sha }}
+          tag: ${{ env.SHA8 }}
           tag-as-latest: false
