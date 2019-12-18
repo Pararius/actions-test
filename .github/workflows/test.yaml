@@ -25,7 +25,7 @@ jobs:
           gcloud auth configure-docker
           rm ${HOME}/gcloud.json
 
-      - uses: Pararius/gcr-deploy@v0.2
+      - uses: Pararius/gcr-deploy@v0.3
         with:
           host: eu.gcr.io
           project: real-estate-classifieds
