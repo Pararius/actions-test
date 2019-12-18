@@ -31,4 +31,4 @@ jobs:
           project: real-estate-classifieds
           image: actions-test/test
           tag: ${{ github.sha }}
-          tag-as-latest: true
+          tag-as-latest: false
