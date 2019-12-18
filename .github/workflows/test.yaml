@@ -9,11 +9,14 @@ jobs:
     
     steps:
       - uses: actions/checkout@v1
+      
+      - name: Set short tag
+        run: echo ::set-env name=SHORT_TAG::$(echo ${GITHUB_SHA::8})
     
       - name: Build Docker image
         run: |
           docker build \
-            -t eu.gcr.io/real-estate-classifieds/actions-test/test:${{ github.sha }} \
+            -t eu.gcr.io/real-estate-classifieds/actions-test/test:${{ env.SHORT_TAG }} \
             .
 
       - name: Login to Google Cloud
@@ -24,9 +27,6 @@ jobs:
           gcloud auth activate-service-account --key-file=${HOME}/gcloud.json
           gcloud auth configure-docker
           rm ${HOME}/gcloud.json
-          
-      - name: Set short tag
-        run: echo ::set-env name=SHORT_TAG::$(echo ${GITHUB_SHA::8})
 
       - name: Deploy to GCR
         uses: Pararius/gcr-deploy@v0.3
