@@ -29,7 +29,7 @@ jobs:
           rm ${HOME}/gcloud.json
 
       - name: Deploy to GCR
-        uses: Pararius/gcr-deploy@v0.3
+        uses: Pararius/gcr-deploy@v1.1
         with:
           host: eu.gcr.io
           project: real-estate-classifieds
